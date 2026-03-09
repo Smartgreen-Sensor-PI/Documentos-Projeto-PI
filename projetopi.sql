@@ -121,7 +121,7 @@ ALTER TABLE assinatura ADD CONSTRAINT chkPlan CHECK( plano IN('anual'));
 
 INSERT INTO assinatura VALUES 
 (DEFAULT, 'Beatriz', 'anual' , 'Pendente', 4600),
-(DEFAULT, 'Vitor' , 'anual' , 'Paga', 395);
+(DEFAULT, 'Vitor' , 'anual' , 'Paga', 4600);
 
 
 DELETE FROM assinatura WHERE idAssinatura = '1';
@@ -135,7 +135,7 @@ SELECT * FROM assinatura;
 ALTER TABLE assinatura ADD COLUMN dtPagamento date;
 UPDATE assinatura SET dtPagamento = '2026-01-20' where idAssinatura = '3';
 UPDATE assinatura SET dtPagamento = '2026-01-10' where idAssinatura = '4';
-UPDATE assinatura SET dtPagamento = '2026-01-7' where idAssinatura = '5';
+UPDATE assinatura SET dtPagamento = '2026-01-07' where idAssinatura = '5';
 UPDATE assinatura SET dtPagamento = '2026-01-22' where idAssinatura = '6';
 UPDATE assinatura SET dtPagamento = '2026-02-23' where idAssinatura = '7';
 SELECT * FROM assinatura;
