@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
    <h1>Simulador Financeiro</h1>
 
    <h3>Saiba os prejuízos que você terá caso não invista no nosso projeto:</h3>
 
    Quantos m² de solo fértil possui sua estufa?: <input id="ipt_metros"><br>
    Que tipo de tomate você planta?: <input id="ipt_tipo"><br>
-   Produtividade por m² (em kg): <input id="ipt_produtividade"><br>
+   Produtividade por pé de tomate (em kg): <input id="ipt_produtividade"><br>
    Valor de venda (R$ por kg): <input id="ipt_venda"><br>
 
    <br> <button onclick="tomate()">Calcule seus prejuízos</button><br>
    <br> <div id="div_msg"></div>
+</body>
 
 <script>
     let mes = 0;
@@ -31,13 +34,14 @@
 
         let plantas = metros * 2 
         let resultado = plantas * produtividade; 
-        let total = resultado * 0.125
+        let total = resultado * venda;
+        let prejuizo = total * 0.125
+
         mes += 120;
-        acumulado += total; 
+        acumulado += prejuizo; 
 
         div_msg.innerHTML += 
             `A cada ${mes} dias a sua plantação de ${tipo} tem um prejuízo de R$ ${acumulado.toFixed(2)}<br>`;
     }
 </script>
-</body>
 </html>
