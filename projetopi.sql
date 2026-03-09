@@ -65,6 +65,39 @@ SELECT * FROM usuario;
 
 DROP TABLE usuario;
 
+CREATE TABLE login(
+idlogin INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(40) NOT NULL,
+email VARCHAR(40) NOT NULL,
+senha VARCHAR(40) UNIQUE NOT NULL 
+);
+
+INSERT INTO login(nome, email, senha) VALUES
+('João Miguel', 'joaomiguel@gmail.com', 'joao212223'),
+('Pedro', 'pedro@gmail.com', 'pedro9382'),
+('Guilherme', 'guilherme2@gmail.com', 'guilherme9382'),
+('Pedro Rivello', 'rivello2@gmail.com', 'rivello8997'),
+('Ana', 'ana2@gmail.com', 'ana4321');
+
+SELECT * FROM login;
+
+INSERT INTO login(nome, email, senha) VALUES 
+('João Victor', 'joaovictor@gmail.com','jv212224'),
+('Ana Luisa', 'analuisa@gmail.com', 'analuisa122112'),
+('Felipe Amoroso', 'felipeamoroso@gmail.com','felipe454647');
+
+DESCRIBE login;
+
+UPDATE login SET senha = 'Joao2322122' WHERE idlogin = '1';
+UPDATE login SET senha = 'pedro343536' WHERE idlogin = '2';
+UPDATE login SET senha = 'gui454637' WHERE idlogin = '3';
+
+DROP TABLE login;
+
+
+
+
+
 Create table assinatura(
 idAssinatura INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(40) NOT NULL ,
