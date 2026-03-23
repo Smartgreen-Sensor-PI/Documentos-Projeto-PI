@@ -12,38 +12,53 @@
    <h3>Saiba os prejuízos que você terá por safra, caso não invista no nosso projeto:</h3>
 
     <!--4 campos de inserir e um botão-->
-   Quantos m² de solo fértil possui sua estufa?: <input id="ipt_metros"><br>
-   Qual a média de produtividade por pé de tomate na sua estufa(em kg)?: <input id="ipt_produtividade"><br>
-   Valor de venda (R$ por kg): <input id="ipt_venda"><br>
+   Quantos m² de solo fértil possui sua estufa?: <input id="ipt_metro2" placeholder="Ex: 10"><br><br><br>
+   Qual a média de produtividade por pé de tomate na sua estufa(em kg)?: <input id="ipt_produtividade" placeholder="Ex: 2"><br><br><br>
+   Tempereratura da Estufa(Em graus): <input type="text" id="ipt_temp_atual" placeholder="Ex: 30"><br><br><br>
+   Valor de venda do tomate (R$ por kg): <input id="ipt_venda" placeholder="Ex: 6"><br><br><br>
 
-   <br><button onclick="tomate()">Calcule seus prejuízos</button> <h4>(E caso você queira ver seu prejuízo e seu lucro sendo acumulados por safra, clique novamente no botão.)</h4><br>
-   <br> <div id="div_msg"></div>
+   <br><button onclick="tomate()">Calcule seus prejuízos</button>
+   
+   <h4>(Caso você queira ver seu prejuízo e seu lucro sendo acumulados por safra, clique novamente no botão.)</h4> <br><br>
+    <div id="div_msg"></div>
 </body>
-
+</html>
 <script>
-    //Variáveis globais para acumular no final
-    let safra= 0;
-    let acumulado = 0;
-    let acumulado2 = 0;
+
+    let safra = 0;
+    let acm_prejuizo = 0;
+    let acm_total = 0;
 
     function tomate() {
-        //Variáveis para nomear os valores inseridos
+
         let venda = Number(ipt_venda.value);
-        let metros = Number(ipt_metros.value);
+        let metro = Number(ipt_metro2.value);
         let produtividade = Number(ipt_produtividade.value);
-        
-        //Cálculos
-        let plantas = metros * 2 ;
-        let resultado = plantas * produtividade; 
-        let total = resultado * venda;
-        let prejuizo = total * 0.125;
+        let temperatura = Number(ipt_temp_atual.value);
+        // metro * 2 (1 m2 equivale a 2 pés de tomate)
+        let plantas = metro * 2;
+        // podemos colocar nesse calculo a media de venda por caixa que é 22kg a 25
+        // também podemos colocar que uma safra inteira se da em 4 meses, que são os dados que temos
+        let total = (plantas * produtividade) * venda;
+        let porcentagem_perda = 0;
 
+
+        if (temperatura > 38 || temperatura < 8) {
+            porcentagem_perda = 1; // perda de 100%
+        } else if (temperatura > 28 || temperatura < 15) {
+            porcentagem_perda = 0.30; // perda (entre 20% e 40%)
+        } else {
+            porcentagem_perda = 0; // sem perda
+        }
+
+        let prejuizo = total * porcentagem_perda;
         safra += 1;
-        acumulado += prejuizo; 
-        acumulado2 += total;
+        acm_prejuizo += prejuizo;
+        acm_total += total;
 
-        div_msg.innerHTML +=  `A cada ${safra} safra, com a estufa controlada você lucraria R$${acumulado2.toFixed(2)} no total, porém sem esse 
-            monitoramento você sofre um prejuízo de R$${acumulado.toFixed(2)} na sua plantação de tomate <br>`;
+
+        div_msg.innerHTML += `A cada ${safra} safra, com a estufa controlada (temperatura ideal) você lucraria R$${acm_total.toFixed(2)} no total. <br>
+        Com a temperatura atual de ${temperatura}°C, sua perda é de ${porcentagem_perda * 100}%. <br>
+        Sem o monitoramento, você sofre um prejuízo acumulado de R$${acm_prejuizo.toFixed(2)} na sua plantação. <br><br>`;
     }
 </script>
-</html>
