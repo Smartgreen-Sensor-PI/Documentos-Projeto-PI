@@ -40,7 +40,7 @@ volume DECIMAL(7,2),
 fkCliente INT NOT NULL,
 	CONSTRAINT fkEstufaCliente 
 		FOREIGN KEY (fkCliente)
-			REFERENCES cliente(idCliente)
+			REFERENCES usuario(idUsuario)
 );
 
 
